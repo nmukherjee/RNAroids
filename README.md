@@ -4,7 +4,7 @@
 
 The role of post-transcriptional regulation in roid rage unfortunately still remains unclear.
 
-### Steroid horomones produced by the adrenal cortex are important physiologically regulators. The goal of this research is to understand the RNA regulatory mechanisms controlling steroid hormone metabolism. The experiments are designed to quantify RNA metabolism, specifically, the kinetics of indvidual steps of RNA metabolism in human H295R cells during a timecourse response to a steroidogenic stimulus. The quantification relies on a combination of biochemical methods coupled to RNA-sequencing followed by principled computational analysis. We will use metabolic labeling to infer the kinetics of synthesis, processing, and degradation. Ribosome profiling will be utilized to assess translation. **The goal is to quantify the impact of post-transcriptional regulatory events and inferred putative regulators on steroidogenesis.**
+### Steroid horomones produced by the adrenal cortex are physiological potent molecules. The goal of this research is to understand the RNA regulatory mechanisms controlling steroid hormone metabolism. The experiments are designed to quantify RNA metabolism, specifically, the kinetics of indvidual steps of RNA metabolism in human H295R cells during a timecourse response to a steroidogenic stimulus. The quantification relies on a combination of biochemical methods coupled to RNA-sequencing followed by principled computational analysis. We will use metabolic labeling to infer the kinetics of synthesis, processing, and degradation. Ribosome profiling will be utilized to assess translation. **The goal is to quantify the impact of post-transcriptional regulatory events and inferred putative regulators on steroidogenesis.**
 
 ## The workflow will be divided into the following sections:  
 + Generate human steroidogenic transcriptome.  
@@ -32,4 +32,10 @@ Need to include a table describing the data:
 4. Assess utility of new transcripts.
   + Probably filter out "intronic sense" transcripts since these could interfere with quantification of both primary and mature RNA levels.
   + Many divergent transcripts that will not interfere with quantification and are likely to be filtered out due to low expression in later steps in the analysis.
+
+## 2. Metabolic labeling: Kinetics of synthesis, processing, degradation
+
+## 3. Ribosome profiling: Quantifying translation of ORFs
+
+## 4. Data integration
 
