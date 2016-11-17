@@ -1,25 +1,31 @@
-# RNAroids
+# RNAroid Rage
 
-Steroid horomones produced by the adrenal cortext are physiologically important messengers. The goal of this research is to understand the gene regulatory mechanism underlying steroid hormone metabolism by quantifying RNA metabolism. The experiments are designed quantifying the rates of indvidual steps of RNA metabolism in human H295R cells dueing a timecourse response to a steroidogenic stimulus. This relies on the combination of biochemical methods coupled to RNA-sequencing methods followed by principled computational analysis. We quantify RNA regulatory proceses using metabolic labeling of RNA and ribosome profiling.
+## Steroid horomones produced by the adrenal cortext are important physiologically regulators. The goal of this research is to understand the RNA regulatory mechanisms, controlling steroid hormone metabolism. The experiments are designed to by quantifying RNA metabolism, specifically, the kinetics of indvidual steps of RNA metabolism in human H295R cells dueing a timecourse response to a steroidogenic stimulus. This relies on the combination of biochemical methods coupled to RNA-sequencing methods followed by principled computational analysis. We will use metabolic labeling to infer the kinetics of synthesis, processing, and degradation. Ribosome profiling will be utilized to assess translation. **The goal is to identify post-transcriptional regulatory events, as well as infer putative regulators of these events.**
 
-1. Generate the genome with annotations.
-2. Map all the different samples, SE and PE separately, without using any 2-pass options.
-3. Concatenate all SJ.out.tab files. Remove junctions on chrM (false positives, may slow down the 2nd pass).
-4. Re-map all sample including new junctions.
+## The workflow will be divided into the following sections:  
+## Generate human steroidogenic transcriptome.  
+## Infer synthesis, processing, and degradation rates from metabolic labeling.  
+## Identify ORFs with ribosome profiling evidence consistent with translation.  
+## Data integration (with emphasis on genes known to be important for steroidogenesis)  
+### + Identify regulatory events  
+### + Infer putative regulators  
+###  + focus on ZFP36 family and/or miRNAs  
 
 
+Need to include a table of the data
+6 timepoints (including untreated) in replicate.
 
-mkfifo test_R1_A
-mkfifo test_R2_A
+## 1. Generate human steroidogenic transcriptome.
+1. STAR 2-pass mapping strategy  
+  + Map each sample using GENCODEv25 index  
+  + Concatenate all new juctions (some filtering).  
+  + Re-map all sample including new junctions.  
+2. Run stringtie with default parameters on each sample
+3. Merge stringtie-generated GTF:
+  + All samples
+  + Total RNA samples only
+  + 4sU samples only
+4. Assess utility of new transcripts.
+  + Probably filter out "intronic sense" transcripts since these could interfere with quantification of both primary and mature RNA levels.
+  + Many divergents that will not interfere with quantification and likely to be filtered out due to low expression in later steps.
 
-gunzip -c test_R1_A.fastq.gz > test_R1_A &
-gunzip -c test_R2_A.fastq.gz > test_R2_A &
-
-umi_tools extract -I test_R1_A --read2-in=test_R2_A \
-  --bc-pattern=NNNNNNNN   --bc-pattern2=NNNNNNNN \
-  --stdout=processed.1.fastq --read2-out=processed.2.fastq \
-  -L stats.log 
-  
-rm test_R1_A test_R2_A stats.log
-
-gunzip -c test_R1
