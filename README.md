@@ -1,5 +1,9 @@
 # RNAroid Rage
 
+"Roid rage can be defined as a condition in which people tend to act aggressively after taking unusual doses of anabolic steroids regularly. In recent years, several high profile murders and attacks have been attributed to roid rage."
+
+The role of post-transcriptional regulation in roid rage unfortuantely still remains unclear.
+
 ### Steroid horomones produced by the adrenal cortext are important physiologically regulators. The goal of this research is to understand the RNA regulatory mechanisms, controlling steroid hormone metabolism. The experiments are designed to by quantifying RNA metabolism, specifically, the kinetics of indvidual steps of RNA metabolism in human H295R cells dueing a timecourse response to a steroidogenic stimulus. This relies on the combination of biochemical methods coupled to RNA-sequencing methods followed by principled computational analysis. We will use metabolic labeling to infer the kinetics of synthesis, processing, and degradation. Ribosome profiling will be utilized to assess translation. **The goal is to quantify the impact of post-transcriptional regulatory events and inferred putative regulators on steroidogenesis.**
 
 ## The workflow will be divided into the following sections:  
