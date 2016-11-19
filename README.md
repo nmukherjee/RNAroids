@@ -1,12 +1,13 @@
-# RNAroid Rage
+# RNA regulation of steroid metabolism
 
-"Roid rage can be defined as a condition in which people tend to act aggressively after taking unusual doses of anabolic steroids regularly. In recent years, several high profile murders and attacks have been attributed to roid rage."
 
-The role of post-transcriptional regulation in roid rage unfortunately still remains unclear.
+
+Steroid horomones produced by the adrenal cortex are potent molecules regulating important human physiology, including blood sugar levels, inflammation, blood pressure and volume. [The frequency of adrenal gland disorders in humans spans a wide range depending on the particular disorder.](https://www.nichd.nih.gov/health/topics/adrenalgland/conditioninfo/pages/risk.aspx)
+For example, hyperaldasteronism occurs in up to 10% of hypertensive patients, while Cushing's Syndrome 1/100,000 people, though women are 5x more likely to be affected than men. 
 
 ![](https://upload.wikimedia.org/wikipedia/commons/c/ca/1818_The_Adrenal_Glands.jpg)
 
-### Steroid horomones produced by the adrenal cortex are potent molecules regulating important human physiology, including blood sugar levels, inflammation, blood pressure and volume. The goal of this research is to understand the RNA regulatory mechanisms controlling the metabolism of steroid hormone produced in the adrenal cortex. [The frequency of adrenal gland disorders in humans spans a wide range depending on the particular disorder.](https://www.nichd.nih.gov/health/topics/adrenalgland/conditioninfo/pages/risk.aspx) For example, hyperaldasteronism occurs in up to 10% of hypertensive patients, while Cushing's Syndrom 1/100,000 people, though women are 5x more likely to be affected than men. Our experiments are designed to quantify RNA metabolism, specifically, the kinetics of indvidual steps of RNA metabolism in human H295R cells during a timecourse response to a steroidogenic stimulus producing cortisol and aldosterone. The quantification relies on a combination of biochemical methods coupled to RNA-sequencing followed by principled computational analysis. We will use metabolic labeling to infer the kinetics of synthesis, processing, and degradation. Ribosome profiling will be utilized to assess translation. **The goal is to quantify the impact of post-transcriptional regulatory events and inferred putative regulators on steroidogenesis.**
+The goal of this research is to understand the RNA regulatory mechanisms controlling the metabolism of steroid hormone produced in the adrenal cortex.Our experiments are designed to quantify RNA metabolism, specifically, the kinetics of indvidual steps of RNA metabolism in human H295R cells during a timecourse response to a steroidogenic stimulus producing cortisol and aldosterone. The quantification relies on a combination of biochemical methods coupled to RNA-sequencing followed by principled computational analysis. We will use metabolic labeling to infer the kinetics of synthesis, processing, and degradation. Ribosome profiling will be utilized to assess translation. **The goal is to quantify the impact of post-transcriptional regulatory events and inferred putative regulators on steroidogenesis.**
 
 ## The workflow will be divided into the following sections:  
 + Generate human steroidogenic transcriptome.  
@@ -18,8 +19,15 @@ The role of post-transcriptional regulation in roid rage unfortunately still rem
   + Focus on ZFP36 family and/or miRNAs.  
 
 
+## Steroid metabolism
+![](http://www.pointinstitute.org/wp-content/uploads/2015/09/Zona-Glomerulosa.jpg)
+
+
 Need to include a table describing the data:  
 6 timepoints (including untreated) in replicate.
+
+
+
 
 ## 1. Generate human steroidogenic transcriptome.
 1. STAR 2-pass mapping strategy  
