@@ -1,13 +1,11 @@
-# RNA regulation of steroid metabolism
-
-
+# RNA regulation of steroid hormone metabolism
 
 Steroid horomones produced by the adrenal cortex are potent molecules regulating important human physiology, including blood sugar levels, inflammation, blood pressure and volume. [The frequency of adrenal gland disorders in humans spans a wide range depending on the particular disorder.](https://www.nichd.nih.gov/health/topics/adrenalgland/conditioninfo/pages/risk.aspx)
 For example, hyperaldasteronism occurs in up to 10% of hypertensive patients, while Cushing's Syndrome 1/100,000 people, though women are 5x more likely to be affected than men. 
 
 ![](https://upload.wikimedia.org/wikipedia/commons/c/ca/1818_The_Adrenal_Glands.jpg)
 
-The goal of this research is to understand the RNA regulatory mechanisms controlling the metabolism of steroid hormone produced in the adrenal cortex.Our experiments are designed to quantify RNA metabolism, specifically, the kinetics of indvidual steps of RNA metabolism in human H295R cells during a timecourse response to a steroidogenic stimulus producing cortisol and aldosterone. The quantification relies on a combination of biochemical methods coupled to RNA-sequencing followed by principled computational analysis. We will use metabolic labeling to infer the kinetics of synthesis, processing, and degradation. Ribosome profiling will be utilized to assess translation. **The goal is to quantify the impact of post-transcriptional regulatory events and inferred putative regulators on steroidogenesis.**
+**The goal of this research is to understand the RNA regulatory mechanisms controlling the metabolism of steroid hormone produced in the adrenal cortex.** Our experiments are designed to quantify RNA metabolism, specifically, the kinetics of indvidual steps of RNA metabolism in human H295R cells during a timecourse response to a steroidogenic stimulus producing cortisol and aldosterone. The quantification relies on a combination of biochemical methods coupled to RNA-sequencing followed by principled computational analysis. We will use metabolic labeling to infer the kinetics of synthesis, processing, and degradation. Ribosome profiling will be utilized to assess translation. Integration of these data will result in the 1) discovery and quantification of RNA regulatory events and 2) inference of putative regulators (RBPs, lncRNAs, and miRNAs). Finally, we will perturb specific putative regulators and regulatory events to determine their impact on steroidogenesis.
 
 ## The workflow will be divided into the following sections:  
 + Generate human steroidogenic transcriptome.  
