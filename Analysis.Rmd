@@ -1,17 +1,143 @@
 ---
-title: "RNAroidsAnalysis"
-output: html_document
+title: "Steroidogenic RNA metabolism"
+output:
+  html_document: default
+  pdf_document: default
 ---
 
-## Evaluate new transcripts
-
-```{r txsPlots, fig.width=9, fig.height=4, warning=FALSE, echo=FALSE, message=FALSE, eval=TRUE}
-setwd("~/Projects/RNAroids/")
-load("./newTxplots.R")
+```{r loadLibs,warning=FALSE, echo=FALSE, message=FALSE, eval=TRUE}
 library(gridExtra)
+library(grid)
 library(ggplot2)
-grid.arrange(p_threshold_GC, p_threshold_H295R, p_threshold_new, ncol=3)
+library(reshape2)
+library(scales)
+library(RColorBrewer)
 
 ```
 
+#### Mapping stats:
 
+```{r mappingStats, fig.width=9, fig.height=4, warning=FALSE, echo=FALSE, message=FALSE, eval=FALSE}
+
+mapstats <- read.table("mapStats.txt", header=T, sep = "\t")
+mapFracs <- 1-mapstats[,3:4]/mapstats[,2]
+rownames(mapFracs) <- mapstats$Sample
+mapFracsExt <- mapstats[,5:7]/mapstats[,4]
+
+
+p_reads <- ggplot(mapstats, aes(fill=Sample, y=Reads, x=Sample)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Number of Reads:") +     # Set title
+  theme_classic(base_size = 10) +
+  theme(text = element_text(size=10), axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(), plot.title = element_text(size = rel(.9)))
+
+p_reads_dedup <- ggplot(mapstats, aes(fill=Sample, y=Deduplicated, x=Sample)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Number of Deduplicated Reads:") +     # Set title
+  theme_classic(base_size = 10) +
+  theme(text = element_text(size=10), axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(), plot.title = element_text(size = rel(.9)))
+
+
+
+
+```
+
+```{r map_table, results='asis', eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+mapstats <- read.table("mapStats.txt", header=T, sep = "\t")
+mapFracs <- 1-mapstats[,3:4]/mapstats[,2]
+rownames(mapFracs) <- mapstats$Sample
+mapFracsExt <- mapstats[,5:7]/mapstats[,4]
+
+mapTable <- data.frame(Sample=mapstats$Sample,
+                       Reads=prettyNum(mapstats$Reads, big.mark = ","),
+                       Filtered=paste(prettyNum(mapstats$Filtered,big.mark = ",")," (",round(mapstats$Filtered/mapstats$Reads,2),")", sep = ""),
+                       Deduplicated=paste(prettyNum(mapstats$Deduplicated,big.mark = ",")," (",round(mapstats$Deduplicated/mapstats$Filtered,2),")", sep = ""),
+                       round(mapFracsExt,2))
+
+knitr::kable(mapTable, align = "c", booktabs=TRUE)
+```
+
+#### Evaluate transcript assembly:
+##### Thresholds
+
+```{r txAssess, fig.width=12, fig.height=4, warning=FALSE, echo=FALSE, message=FALSE, eval=TRUE}
+
+load("./newTxplots.R")
+grid.arrange(p_threshold_GC, p_threshold_H295R, p_threshold_new, ncol=3)
+grid.text(label = "A)",x = 0.02, y=.95)
+grid.text(label = "B)",x = 0.35, y=.95)
+grid.text(label = "C)",x = 0.69, y=.95)
+
+```
+
+**Figure 1 Thresholds and transcripts.** The number of transcripts detected (y-axis) with at least a given read count (x-axis) in at least 1:24 samples from A) GENCODE v25, B) the stringtie assembly, and C) only the stringtie assembly (novel).
+
+
+##### Biotypes
+
+```{r txAssessBiotype, fig.width=12, fig.height=4, warning=FALSE, echo=FALSE, message=FALSE, eval=TRUE}
+
+grid.arrange(p_newBio, p_threshold_newBio_all, p_threshold_newBio_any, ncol=3)
+grid.text(label = "A)",x = 0.02, y=.95)
+grid.text(label = "B)",x = 0.35, y=.95)
+grid.text(label = "C)",x = 0.69, y=.95)
+
+```
+**Figure 2 Transcript biotypes and thresholds for newly identified transcripts.** A) The number of new transcripts detected by biotype detected. The fraction of transcripts retained when increasing the minimal read count threshold in B) all sample, and C) any sample.
+
+#### Coverage Comparisons:
+##### Total RNA vs 4sU for intronic regions
+```{r intronCov, fig.width=10, fig.height=4, warning=FALSE, echo=FALSE, fig.align='center', message=FALSE, eval=TRUE}
+depths <- 10^seq(-3,3,.25)
+load("allCov.R")
+
+p_IntronCov <- ggplot(data=allData, aes(x=depth, y=nucleotides, group=sample, color=sample)) +
+  geom_line(aes(), size=.5) +     # Set linetype by sex
+  geom_point(size=.5, fill="white") +         # Use larger points, fill with white
+  xlab("Fragments per million") + ylab("Nucleotides") + # Set axis labels
+  ggtitle("Coverage vs Depth:", subtitle = "Introns") +     # Set title
+  theme_classic(base_size = 10) + #ylim(1000,max(allData$nucleotides)) +
+  theme(text = element_text(size=10), plot.title = element_text(size = rel(.9))) +
+  #geom_abline(intercept = 1566226533, slope = 0, colour = "red", size = 1, linetype=2) +
+  scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x), #, n=10),
+                labels = trans_format("log10", math_format(10^.x)),
+                limits=c(5*10e-4,1*10e0))
+
+p_IntronCov
+```
+
+##### Total RNA vs 4sU for exonic regions
+```{r exonCov, fig.width=10, fig.height=4, warning=FALSE, echo=FALSE, fig.align='center', message=FALSE, eval=TRUE}
+depths <- 10^seq(-3,3,.25)
+load("allCovexon.R")
+
+p_ExonCov <- ggplot(data=allData, aes(x=depth, y=nucleotides, group=sample, color=sample)) +
+  geom_line(aes(), size=.5) +     # Set linetype by sex
+  geom_point(size=.5, fill="white") +         # Use larger points, fill with white
+  xlab("Fragments per million") + ylab("Nucleotides") + # Set axis labels
+  ggtitle("Coverage vs Depth:", subtitle = "Exons") +     # Set title
+  theme_classic(base_size = 10) + #ylim(1000,max(allData$nucleotides)) +
+  theme(text = element_text(size=10), plot.title = element_text(size = rel(.9))) +
+  #geom_abline(intercept = 1566226533, slope = 0, colour = "red", size = 1, linetype=2) +
+  scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x), #, n=10),
+                labels = trans_format("log10", math_format(10^.x)),
+                limits=c(5*10e-4,1*10e0))
+
+p_ExonCov
+```
+
+
+#### Interesting Example
+##### [*LINC00473*](https://www.jci.org/articles/view/85250)
+![](./igv_linc.png)
+
+##### Locus with *PDE10A* and *LINC00473*
+![](./igv_pde10_linc.png)
+
+
+##### [*PDE10A*](http://www.genecards.org/cgi-bin/carddisp.pl?gene=PDE10A&keywords=PDE10a)
+![](./igv_pde10.png)
